@@ -1,0 +1,37 @@
+﻿<h1>Hi {{currentUser.firstName}}!</h1>
+<h3>Booking User:</h3>
+<div> 
+    <form [formGroup]="Form">
+
+        <label>
+            Search by bookingId or by bookingPrice:
+          <br />
+          <select formControlName="type" (change)="onTypeChange();">
+            <option [ngValue]="null" disabled>Choose your type search</option>
+            <option *ngFor="let type of typesSearch" [ngValue]="type">
+             {{ type }}
+            </option>
+          </select> 
+          <input type="text" formControlName="search" required (keyup)="onSearchChange();" >
+        </label> 
+      </form>
+    <table class="table">
+        <tr>
+            <th>bookingId</th>
+            <th>bookingPrice</th>
+            <th>firstName</th>
+            <th>bookingTime</th>
+            <th>streetAddress</th>
+        </tr>
+        <tr *ngFor="let booking of userBookings">
+            <td>{{ booking.bookingId }}</td>
+            <td>{{ booking.bookingPrice }}</td>
+            <td>{{ booking.tutenUserClient.firstName }}</td>
+            <td>{{ booking.bookingTime }}</td>
+            <td>{{ booking.locationId.streetAddress }}</td>
+           
+        </tr>
+    </table>
+</div>
+
+<p><a [routerLink]="['/login']">Logout</a></p>
